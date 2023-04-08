@@ -1,0 +1,85 @@
+<html>
+
+<head>
+  <title id="title">LOGIN | FdezNet</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/video.css" />
+  <link rel="icon" href="favicon2.png" />
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+    <!-- Header -->
+    <header id="header">
+      <div class="logo">
+        <img style="width: 60px;" src="./images/logo.png">
+      </div>
+      <div class="content">
+        <h1>| Fichas Alien |</h1>
+
+        <script src="https://unpkg.com/html5-qrcode"></script>
+        <div id="KV" class="tabcontent">
+          <div id="qr-reader" style=" width:300px; border-radius: 10px;"></div>
+          <audio id="scan-sound" src="./barcode.wav"></audio>
+          <div id="qr-reader-results"></div>
+        </div>
+        <script>
+          var resultContainer = document.getElementById('qr-reader-results');
+          var lastResult, countResults = 0;
+          var scanSound = document.getElementById("scan-sound");
+
+          function onScanSuccess(decodedText, decodedResult) {
+            if (decodedText !== lastResult) {
+              ++countResults;
+              lastResult = decodedText;
+              // Handle on success condition with the decoded message.
+              scanSound.play();
+              var url = decodedText;
+              if (!url.includes('http://') && !url.includes('https://')) {
+                url = 'http://' + url;
+              }
+              // Abrir la URL en una nueva pestaña del navegador
+              window.open(url, '_self');
+            }
+          }
+
+
+          var html5QrcodeScanner = new Html5QrcodeScanner(
+            "qr-reader", { fps: 10, qrbox: 200 });
+          html5QrcodeScanner.render(onScanSuccess);
+        </script>
+        <br><br><h3>Error al escanear Intenta</h3>
+        <button onclick="window.location.href='intent://fdezdev.github.io/fdeznetqr/#Intent;scheme=http;package=com.android.chrome;end'">Abrir con Chrome</button>
+
+      </div>
+      <nav>
+      </nav>
+    </header>
+
+    <!-- Main -->
+    <div id="main">
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+    </footer>
+
+  </div>
+
+  <!-- BG -->
+  <div id="bg"></div>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/signup.js"></script>
+  <script src="assets/js/accordion.js"></script>
+</body>
+
+</html>
